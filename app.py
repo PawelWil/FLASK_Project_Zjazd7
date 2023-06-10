@@ -17,5 +17,16 @@ def current_date():
 def current_date_two():
     return 'sadasasdasd'
 
+
+
+counter = 0
+@app.route ('/counter')
+def counter_view():
+    global counter
+    counter += 1
+    return f'Counting of opening:{counter} '
+
+
+
 if __name__ == '__main__':
     app.run()
