@@ -1,6 +1,6 @@
 from flask import Flask
 from datetime import datetime
-
+import random
 
 app = Flask(__name__)
 
@@ -26,6 +26,29 @@ def counter_view():
     counter += 1
     return f'Counting of opening:{counter} '
 
+
+
+@app.route ('/color')
+def random_color():
+    colors = ['red', 'blue', 'green']
+    return colors [random.randint(0, 2)]
+
+
+@app.route ('/hello-world') # podstawowy sposów
+def hello_world_html():
+    return"""
+    <h1>Pierwszy HTML!</h1>
+    <div><b>Hello</b>world</div>
+    """
+
+@app.route ('/hello-world') # na bazie szablonu - po prostu szybciej, podtsawienie danych przez nas jest robiony w folderze TEMPLATES
+def hello_world_html():
+    return"""
+    <h1>Pierwszy HTML!</h1>
+    <div><b>Hello</b>world</div>
+    """
+
+print(app.url_map) #dostajemy na konsole mapę naszych zdefiniowanych end-pointów
 
 
 if __name__ == '__main__':
