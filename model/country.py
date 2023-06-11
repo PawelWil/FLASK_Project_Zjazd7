@@ -1,4 +1,5 @@
 import json
+import pycountry_convert
 
 def load_db():
     with open('country_info.json', encoding='utf-8') as mock_database:
@@ -14,5 +15,13 @@ def find_by_name(name: str):
 def find_by_index(index: int):
     return db [index]
 
+
+def find_continent_by_cc(country_code):
+    try:
+        continent_code = pycountry_convert.country_alpha2_to_continent_code(country_code)
+        continent_name = pycountry_convert.convert_continent_code_to_continent_name(continent_code)
+        return continent_name
+    except KeyError:
+        return None
 
 db = load_db()
