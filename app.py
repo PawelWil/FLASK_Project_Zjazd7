@@ -1,8 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, abort
 from datetime import datetime
 import random
 
-from model.country import db
+from model.country import db, find_by_name
 
 app = Flask(__name__)
 
@@ -56,6 +56,18 @@ def random_country():
     country = db[country_index]
 
     return render_template('country.html', country=country)
+
+
+
+#Path variable: <typ:nazwa>
+@app.route ('/countries/<name>')
+def country_by_name(name: str):
+    try:
+        found_country = find_by_name(name)
+    except ValueError as ex:
+        abort(404, ex)
+    return render_template('country.html', country=found_country)
+
 
 
 
