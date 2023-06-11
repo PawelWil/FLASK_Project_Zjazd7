@@ -1,6 +1,8 @@
-from flask import Flask
+from flask import Flask, render_template
 from datetime import datetime
 import random
+
+from model.country import db
 
 app = Flask(__name__)
 
@@ -34,19 +36,28 @@ def random_color():
     return colors [random.randint(0, 2)]
 
 
-@app.route ('/hello-world') # podstawowy sposów
-def hello_world_html():
-    return"""
-    <h1>Pierwszy HTML!</h1>
-    <div><b>Hello</b>world</div>
-    """
+# @app.route ('/hello-world') # podstawowy sposób. UWAGA poniższy endpoint ma tą samą ścieżkę, więc musi ten być skomentowany, bo jak jest
+# aktywny, to dwa razy się do niego odnosi i nie działa
+# def hello_world_html():
+#     return"""
+#     <h1>Pierwszy HTML!</h1>
+#     <div><b>Hello</b>world</div>
+#     """
 
 @app.route ('/hello-world') # na bazie szablonu - po prostu szybciej, podtsawienie danych przez nas jest robiony w folderze TEMPLATES
 def hello_world_html():
-    return"""
-    <h1>Pierwszy HTML!</h1>
-    <div><b>Hello</b>world</div>
-    """
+    return render_template('welcome.html', message = 'Aplikacje Server Side są super!')
+
+
+
+@app.route ('/countries')
+def random_country():
+    country_index = random.randint(0, 246)
+    country = db[country_index]
+
+    return render_template('country.html', country=country)
+
+
 
 print(app.url_map) #dostajemy na konsole mapę naszych zdefiniowanych end-pointów
 
