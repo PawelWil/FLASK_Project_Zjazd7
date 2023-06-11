@@ -7,11 +7,13 @@
 <body>
 <div style="display: flex; justify-content: center; align-items: center; height: 100vh">
     <div style="display: flex; flex-flow: row wrap; justify-content: center; gap: 15px; width: 360px">
-        {% for i in range(9) %}
-            <div style="width: 100px; height: 100px; display: flex; justify-content: center; align-items:center;
-             cursor: pointer; background-color: black">
-                <div style="color: white">{{ i }}</div>
-            </div>
+        {% for square in squares %}
+            <a href="{{ url_for('increment_counter_square', index=loop.index0) }}">
+                <div style="width: 100px; height: 100px; display: flex; justify-content: center; align-items:center;
+             cursor: pointer; background-color: {{ square.color }}">
+                    <div style="color: white">{{ square.counter }}</div>
+                </div>
+            </a>
         {% endfor %}
     </div>
 </div>

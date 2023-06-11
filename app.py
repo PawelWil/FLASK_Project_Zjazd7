@@ -85,13 +85,36 @@ def country_by_index(index: int):
 
 #---------LAB2-----------------------------
 
-@app.route('/square')
-def random_square():
-    squares = [0, 9]
-    global counter
-    counter += 1
-    return render_template('square.html' )
+colors = ['red', 'blue', 'green', 'yellow']
 
+
+class Square:
+
+    def __init__(self):
+        self.color = colors[random.randint(0, len(colors) - 1)]
+        self.counter = 0
+
+
+squares = []
+
+def create_squares():
+    global squares
+    squares = []
+    for i in range(9):
+        squares.append(Square())
+
+
+
+@app.route('/square')
+def create_square():
+    create_squares()
+    return render_template('square.html', squares=squares)
+
+@app.route('/square/<int:index>')
+def increment_counter_square(index: int):
+    found_square = squares[index]
+    found_square.counter = found_square.counter + 1
+    return render_template('square.html', squares=squares)
 
 
 
