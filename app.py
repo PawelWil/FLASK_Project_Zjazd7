@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, url_for
 from datetime import datetime
 import random
 
@@ -70,13 +70,14 @@ def country_by_name(name: str):
 
 
 
-@app.route('/countries/<int:index>')
-def countries_by_index(index: int):
+@app.route('/countries/index/<int:index>')
+def country_by_index(index: int):
     try:
         found_country = find_by_index(index)
+
     except IndexError:
         abort(404, f'Country by index {index} can not be found!')
-    return render_template('country.html', country=found_country)
+    return render_template('country_index.html', country=found_country, index=index)
 
 
 

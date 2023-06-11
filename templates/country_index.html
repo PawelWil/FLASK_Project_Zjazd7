@@ -11,6 +11,10 @@
 <p>Strefa czasowa: {{ country.timezone }}</p>
 <p>Waluta: {{ country.currency }}</p>
 
+<button>
+    <a href="{{url_for('country_by_index', index=index + 1)}}">
+        Następne Państwo
+    </a>
 </button>
 </body>
 </html>
