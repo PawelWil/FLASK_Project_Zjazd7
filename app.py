@@ -2,7 +2,7 @@ from flask import Flask, render_template, abort
 from datetime import datetime
 import random
 
-from model.country import db, find_by_name
+from model.country import db, find_by_name, find_by_index
 
 app = Flask(__name__)
 
@@ -67,6 +67,17 @@ def country_by_name(name: str):
     except ValueError as ex:
         abort(404, ex)
     return render_template('country.html', country=found_country)
+
+
+
+@app.route('/countries/<int:index>')
+def countries_by_index(index: int):
+    try:
+        found_country = find_by_index(index)
+    except IndexError:
+        abort(404, f'Country by index {index} can not be found!')
+    return render_template('country.html', country=found_country)
+
 
 
 
