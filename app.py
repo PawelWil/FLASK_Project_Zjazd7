@@ -3,7 +3,7 @@ from datetime import datetime
 import random
 import pycountry_convert
 
-from model.country import db, find_by_name, find_by_index, find_continent_by_cc
+from model.country import db, find_by_name, find_by_index, find_continent_by_cc, continent_map
 
 app = Flask(__name__)
 
@@ -79,7 +79,7 @@ def country_by_index(index: int):
         found_country['continent'] = find_continent_by_cc(found_country['cc'])
     except IndexError:
         abort(404, f'Country by index {index} can not be found!')
-    return render_template('country_index.html', country=found_country, index=index)
+    return render_template('country_index.html', country=found_country, index=index, continent_map=continent_map)
 
 
 

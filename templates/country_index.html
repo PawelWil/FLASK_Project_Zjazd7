@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Kraj</title>
 </head>
-<body>
+<>
 <h1>Nazwa kraju: {{ country.country }} </h1>
 <p>Stolica: {{ country.capital }}</p>
 <p>Kod kierunkowy: {{ country.iac }}</p>
@@ -43,16 +43,27 @@
 {% else %}
     <h3>Nieznany kontynent</h3>
 
-
 {% endif %}
 
 
+</hr>
+<br/><br/>
 
+<h1>Statystyki wyszukiwania</h1>
+{%  for key, value in continent_map.items() %}
+    <div><b>{{ key }}</b> {{ value }}</div>
+{% endfor %}
+
+
+
+</hr>
+<br/><br/>
 
 <button>
     <a href="{{url_for('country_by_index', index=index + 1)}}">
         Następne Państwo
     </a>
 </button>
+
 </body>
 </html>
