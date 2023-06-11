@@ -83,6 +83,20 @@ def country_by_index(index: int):
 
 
 
+#---------LAB2-----------------------------
+
+@app.route('/square')
+def random_square():
+    squares = [0, 9]
+    global counter
+    counter += 1
+    return render_template('square.html' )
+
+
+
+
+
+
 
 
 print(app.url_map) #dostajemy na konsole mapę naszych zdefiniowanych end-pointów
